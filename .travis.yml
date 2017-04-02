@@ -1,0 +1,12 @@
+language: java
+jdk:
+- oraclejdk8
+sudo: false
+addons:
+  apt:
+    packages:
+    - oracle-java8-installer
+deploy:
+  provider: heroku
+  api_key:
+    secure: ouABaGNf7FfCOg+aJNsN9Vf3HosVywROsk5s/f8AVXMgVXMoZ3Vi3n0eV3AvaqLcvjMicXyKumCTxmG5L6qyuZ3t1x7jaKGMdqUSntALBy9Gx2nWDJQEwA/xr2eeyOpywbd6I92uY6LkA4oEY7AHV4ST6cgzS3arS3PKtfx9EU7dphNegjOsujrSMakk5ZfDrQCimKZ5ZzxfUtrRPd8vwnMl8uI79khj/4H6icxLvn1PBOeZPmQalDXC29b1aQzZPdUuQo0dkzquoNlmD8+woFTOpUuipdfXNwh8Kv3ksQc2dc2krFgUVUgo340oy2srlp8c1EpW5uJF80CIYuNNUZAHUO5HNLg+joFxzEq6iEIYeoxwJt5foBywjGeUPr0ZcfTIWcGgK5/l6AAAWhYMk8gHeHMc/v1gARPdO7vVsojpn94zk4YZNIqVn5jHsrYTNthtGs5d+uIKXl68qukhwIU8s5URyhJyq0OtYcPFLQxlSVWKL+UcuLhKg2rdI992PjNmDRylmS63U9WH57/q+xN7s0ylTXYyXM7LHBMIbCtwMYA0wKvB5OCamN/p/vH2TKKgtNltk4IceWM8oQBtib5S8cFyEC0vsqxF8rbz9izCYpygnrPx7PH1e+dCEhQgjuwB+Dy7oEMAFRAk5Q3Z5lP9cWpnzzf7rr7/D9306mo=
