@@ -42,4 +42,31 @@ public class UserDAO {
         return idResponse;
     }
 
+    @Nullable
+    public String getPassword(String username) {
+        final Connection connection = DataSourceUtils.getConnection(dataSource);
+        final String query = "SELECT password FROM users WHERE username = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, username);
+            try (ResultSet resultSet = ps.executeQuery()) {
+                resultSet.next();
+                return resultSet.getString("password");
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public boolean setData(UserModel user) {
+        final Connection connection = DataSourceUtils.getConnection(dataSource);
+        final String query = "UPDATE users SET data = ? WHERE username = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, user.getData());
+            ps.setString(2, user.getUsername());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 }

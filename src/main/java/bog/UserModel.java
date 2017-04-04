@@ -21,6 +21,10 @@ public class UserModel {
         return password;
     }
 
+    public String getData() {
+        return data;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }

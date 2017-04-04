@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = "/api")
 public class UserController {
     private final UserService userService;
 
@@ -22,11 +22,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseEntity registration(@RequestBody UserModel body) {
         final IdResponse idResponse = userService.registration(body);
         if (idResponse != null) {
             return ResponseEntity.ok(idResponse);
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{}");
+    }
+
+    @RequestMapping(value = "/data", method = RequestMethod.POST)
+    public ResponseEntity setData(@RequestBody UserModel body) {
+        if (userService.setData(body)) {
+            return ResponseEntity.ok("{}");
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{}");
     }

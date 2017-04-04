@@ -29,4 +29,12 @@ public class UserService {
         return userDAO.registration(user);
     }
 
+    public boolean setData(UserModel user) {
+        final String passwordHash = userDAO.getPassword(user.getUsername());
+        if (passwordEncoder.matches(user.getPassword(), passwordHash)) {
+            return userDAO.setData(user);
+        }
+        return false;
+    }
+
 }
