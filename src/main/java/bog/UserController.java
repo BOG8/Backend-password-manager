@@ -3,10 +3,7 @@ package bog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by zac on 02.04.17.
@@ -35,6 +32,16 @@ public class UserController {
     public ResponseEntity setData(@RequestBody UserModel body) {
         if (userService.setData(body)) {
             return ResponseEntity.ok("{}");
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{}");
+    }
+
+    @RequestMapping(value = "/data", method = RequestMethod.GET)
+    public ResponseEntity getData(@RequestParam(value = "username") String username,
+                                  @RequestParam(value = "password") String password) {
+        final String data = userService.getData(username, password);
+        if (data != null) {
+            return ResponseEntity.ok(data);
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{}");
     }

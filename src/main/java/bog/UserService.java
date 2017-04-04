@@ -37,4 +37,12 @@ public class UserService {
         return false;
     }
 
+    @Nullable
+    public String getData(String username, String password) {
+        final String passwordHash = userDAO.getPassword(username);
+        if (passwordEncoder.matches(password, passwordHash)) {
+            return userDAO.getData(username);
+        }
+        return null;
+    }
 }

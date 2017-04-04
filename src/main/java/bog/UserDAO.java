@@ -69,4 +69,19 @@ public class UserDAO {
             return false;
         }
     }
+
+    @Nullable
+    public String getData(String username) {
+        final Connection connection = DataSourceUtils.getConnection(dataSource);
+        final String query = "SELECT data FROM users WHERE username = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, username);
+            try (ResultSet resultSet = ps.executeQuery()) {
+                resultSet.next();
+                return resultSet.getString("data");
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }
