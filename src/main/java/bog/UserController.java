@@ -39,7 +39,7 @@ public class UserController {
     @RequestMapping(value = "/data", method = RequestMethod.GET)
     public ResponseEntity getData(@RequestParam(value = "username") String username,
                                   @RequestParam(value = "password") String password) {
-        final String data = userService.getData(username, password);
+        final DataModel data = userService.getData(username, password);
         if (data != null) {
             return ResponseEntity.ok(data);
         }

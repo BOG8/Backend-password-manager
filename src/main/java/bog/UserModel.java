@@ -8,6 +8,7 @@ public class UserModel {
     private String username;
     private String password;
     private String data;
+    private String vector;
 
     public UserModel() {
 
@@ -23,6 +24,10 @@ public class UserModel {
 
     public String getData() {
         return data;
+    }
+
+    public String getVector() {
+        return vector;
     }
 
     public void setPassword(String password) {

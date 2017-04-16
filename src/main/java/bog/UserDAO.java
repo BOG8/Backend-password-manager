@@ -59,10 +59,11 @@ public class UserDAO {
 
     public boolean setData(UserModel user) {
         final Connection connection = DataSourceUtils.getConnection(dataSource);
-        final String query = "UPDATE users SET data = ? WHERE username = ?";
+        final String query = "UPDATE users SET data = ?, vector = ? WHERE username = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, user.getData());
-            ps.setString(2, user.getUsername());
+            ps.setString(2, user.getVector());
+            ps.setString(3, user.getUsername());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -71,14 +72,14 @@ public class UserDAO {
     }
 
     @Nullable
-    public String getData(String username) {
+    public DataModel getData(String username) {
         final Connection connection = DataSourceUtils.getConnection(dataSource);
-        final String query = "SELECT data FROM users WHERE username = ?";
+        final String query = "SELECT data, vector FROM users WHERE username = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, username);
             try (ResultSet resultSet = ps.executeQuery()) {
                 resultSet.next();
-                return resultSet.getString("data");
+                return new DataModel(resultSet.getString("data"), resultSet.getString("vector"));
             }
         } catch (SQLException e) {
             return null;
