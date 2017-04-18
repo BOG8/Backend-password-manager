@@ -1,1 +1,0 @@
-ALTER TABLE public.users ADD vector VARCHAR(60) NULL
